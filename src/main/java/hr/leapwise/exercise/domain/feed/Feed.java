@@ -1,8 +1,9 @@
 package hr.leapwise.exercise.domain.feed;
 
-import hr.leapwise.exercise.domain.feed.analyisis.Tokenizer;
+import java.util.Set;
 
-public interface Feed<T, U> {
+public interface Feed<T> {
+    String getLanguage();
 
-    void tokenizeEntries(Tokenizer<T, U> tokenizer);
+    Set<T> getFeedEntries();
 }

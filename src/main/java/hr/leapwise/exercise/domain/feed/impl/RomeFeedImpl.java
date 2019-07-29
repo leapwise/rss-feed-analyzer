@@ -2,20 +2,12 @@ package hr.leapwise.exercise.domain.feed.impl;
 
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
-import cue.lang.WordIterator;
-import cue.lang.stop.StopWords;
-import hr.leapwise.exercise.domain.feed.exceptions.FeedException;
-import hr.leapwise.exercise.domain.feed.exceptions.FeedExceptionMessageCode;
+import hr.leapwise.exercise.domain.analyisis.extractors.impl.CueWord;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+import java.util.*;
 
-public class RomeFeedImpl extends AbstractFeed<Set<String>, RomeFeedEntryImpl> {
+public class RomeFeedImpl extends AbstractFeed<RomeFeedEntryImpl, Set<CueWord>> {
 
     final private String title;
     final private String description;
@@ -57,22 +49,8 @@ public class RomeFeedImpl extends AbstractFeed<Set<String>, RomeFeedEntryImpl> {
         }
     }
 
-    public void tokenizeTitles() {
-
-        if (this.language != null && this.language.matches("(?i)(^EN-.+|.+-EN$)")){
-            super.tokenizeEntries((e) ->
-                    StreamSupport.stream(new WordIterator(e.getTitle()).spliterator(), true)
-                            .filter(w ->!StopWords.English.isStopWord(w))
-                            .collect(Collectors.toSet())
-
-            );
-
-        } else {
-            // This implementation supports only English
-            // Also, assumption is made that all the items in the feed are in the same language:
-            //  - those that are not will simply not be analysed
-            throw new FeedException(FeedExceptionMessageCode.UNSUPPORTED_LANGUAGE);
-        }
-
+    @Override
+    public String getLanguage() {
+        return this.language;
     }
 }

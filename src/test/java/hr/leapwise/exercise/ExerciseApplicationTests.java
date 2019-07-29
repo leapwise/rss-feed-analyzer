@@ -65,7 +65,6 @@ public class ExerciseApplicationTests {
 
             customFeed = new RomeFeedImpl((SyndFeedImpl) feed);
 
-            customFeed.tokenizeTitles();
 
         } catch (FeedException e) {
             e.printStackTrace();
