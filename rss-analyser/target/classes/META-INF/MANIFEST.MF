@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: RSS Analyser
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Ivan
+Implementation-Vendor-Id: com.leapwise.zganjer.ivan
+Build-Jdk: 1.8.0_201
+Implementation-URL: http://projects.spring.io/spring-boot/rss-analyser
+ /
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

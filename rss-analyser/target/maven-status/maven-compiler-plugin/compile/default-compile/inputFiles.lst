@@ -1,0 +1,14 @@
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\rest\RSSFetchController.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\RSSAnalyserApp.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\singleton\Pipeline.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\model\RSSAnalysis.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\model\RSSTitleKeyword.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\rest\RSSInsertController.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\dao\IRSSRepository.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\dao\OutputDataMapper.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\service\RSSService.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\dao\RSSRepository.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\helper\WordTypes.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\model\RSSFeedTitle.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\model\RSSInput.java
+C:\Users\Ivan\eclipse-workspace\rss-analyser\src\main\java\com\leapwise\zganjer\model\RSSOutputData.java
