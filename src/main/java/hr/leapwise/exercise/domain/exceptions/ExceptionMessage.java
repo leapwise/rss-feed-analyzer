@@ -1,8 +1,9 @@
 package hr.leapwise.exercise.domain.exceptions;
 
 
-public interface ExceptionMessage<T, U extends ExceptionMessage> {
+public interface ExceptionMessage<T> {
+
     T getMessage();
 
-    U setParameters(Object ... args);
+    ExceptionMessage setParameters(Object ... args);
 }
