@@ -1,4 +1,4 @@
-package hr.leapwise.exercise.service;
+package hr.leapwise.exercise.domain;
 
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorException;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorExceptionMessage;

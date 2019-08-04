@@ -5,14 +5,15 @@ import cue.lang.stop.StopWords;
 import hr.leapwise.exercise.domain.engine.analyisis.Dissasambler;
 import hr.leapwise.exercise.domain.engine.analyisis.extractors.WordsExtractor;
 import hr.leapwise.exercise.domain.engine.analyisis.extractors.impl.CueWord;
-import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItem;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItemModel;
 import hr.leapwise.exercise.domain.engine.feed.impl.RomeFeedEntryImpl;
+import hr.leapwise.exercise.domain.util.GuidUtil;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class EntryCustomDissasambler implements Dissasambler<RomeFeedEntryImpl, CustomItem> {
+public class EntryCustomDissasambler implements Dissasambler<RomeFeedEntryImpl, CustomItemModel> {
 
     private static WordsExtractor<Set<CueWord>, RomeFeedEntryImpl> wordsExtractor = (e) ->
             StreamSupport.stream(new WordIterator(e.getTitle()).spliterator(), true)
@@ -22,8 +23,8 @@ public class EntryCustomDissasambler implements Dissasambler<RomeFeedEntryImpl, 
 
 
     @Override
-    public CustomItem disassemble(final RomeFeedEntryImpl entry) {
-        final CustomItem item = new CustomItem(entry.getIdentifier());
+    public CustomItemModel disassemble(final RomeFeedEntryImpl entry) {
+        final CustomItemModel item = new CustomItemModel(GuidUtil.getStringGuid(entry.getTitle(), entry.getLink(), entry.getIdentifier()));
         item.extract(wordsExtractor, entry);
         item.setLink(entry.getLink());
         item.setTitle(entry.getTitle());

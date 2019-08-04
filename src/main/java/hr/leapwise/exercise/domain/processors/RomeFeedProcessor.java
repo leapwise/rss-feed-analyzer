@@ -7,7 +7,7 @@ import com.sun.syndication.io.XmlReader;
 import hr.leapwise.exercise.domain.engine.feed.impl.RomeFeedImpl;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorException;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorExceptionMessage;
-import hr.leapwise.exercise.service.FeedProcessor;
+import hr.leapwise.exercise.domain.FeedProcessor;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

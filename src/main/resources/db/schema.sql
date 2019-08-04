@@ -22,13 +22,14 @@ CREATE TABLE result (
 );
 
 CREATE TABLE feed (
-  feed_id IDENTITY,
+  id IDENTITY,
   title VARCHAR2(255) NOT NULL,
   link VARCHAR2(1024) NOT NULL,
+  guid VARCHAR2(64) NOT NULL
   last_build_date TIMESTAMP WITH TIME ZONE,
   feed_language VARCHAR2(16),
   result_id BIGINT(19) NOT NULL,
-  FOREIGN KEY (result_id ) references result (id )
+  FOREIGN KEY (result_id ) references result (id)
 );
 
 CREATE TABLE analysis_result (

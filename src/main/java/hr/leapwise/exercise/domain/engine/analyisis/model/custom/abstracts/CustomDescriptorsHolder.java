@@ -1,18 +1,19 @@
 package hr.leapwise.exercise.domain.engine.analyisis.model.custom.abstracts;
 
 import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomDescriptor;
-import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItem;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItemModel;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class CustomDescriptorsHolder {
+public abstract class CustomDescriptorsHolder {
 
-     protected Map<CustomDescriptor, Set<CustomItem>> significantDescriptors = new HashMap<>();
+    protected Map<CustomDescriptor, Set<CustomItemModel>> significantDescriptors = new HashMap<>();
 
-     public Map<CustomDescriptor, Set<CustomItem>> getSignificantDescriptors() {
-        return Collections.unmodifiableMap(significantDescriptors);
+    public Map<CustomDescriptor, Set<CustomItemModel>> getSignificantDescriptors() {
+        return significantDescriptors;
+    }
+
+    public void setSignificantDescriptors(Map<CustomDescriptor, Set<CustomItemModel>> significantDescriptors) {
+        this.significantDescriptors = significantDescriptors;
     }
 }

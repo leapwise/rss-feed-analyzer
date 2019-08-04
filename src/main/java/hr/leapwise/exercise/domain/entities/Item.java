@@ -1,40 +1,23 @@
 package hr.leapwise.exercise.domain.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ITEM")
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Item  extends FeedEntry {
 
-    @Column
-    @NotNull
-    private String title;
+    // Do not remove - persistence related
+    private Item() { }
 
-    @Column
-    @NotNull
-    private String link;
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
+    public Item(final String title, final String link, final String guid) {
         this.title = title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
         this.link = link;
+        this.guid = guid;
     }
+
+
+
 }

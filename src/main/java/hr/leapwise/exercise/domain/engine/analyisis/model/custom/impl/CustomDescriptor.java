@@ -12,6 +12,10 @@ public class CustomDescriptor {
         this.word = word.getWord();
     }
 
+    public String getWord() {
+        return word;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

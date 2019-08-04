@@ -1,4 +1,4 @@
-package hr.leapwise.exercise.service;
+package hr.leapwise.exercise.domain;
 
 import java.util.Optional;
 import java.util.function.Function;

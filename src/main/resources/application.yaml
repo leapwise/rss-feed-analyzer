@@ -1,9 +1,15 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:analysisDb;MODE=ORACLE
+    url: jdbc:h2:mem:analysisDb;MODE=ORACLE;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
   h2:
     console:
       enabled: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        # generate_statistics: true
+
+# custom properties
+treshold: 3

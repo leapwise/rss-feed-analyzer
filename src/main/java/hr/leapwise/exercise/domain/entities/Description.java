@@ -11,9 +11,21 @@ public class Description {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(updatable = false)
     @NotNull
     private String code;
 
+    private Description() {};
 
+    public Description(final String code) {
+        this.code = code;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCode() {
+        return code;
+    }
 }

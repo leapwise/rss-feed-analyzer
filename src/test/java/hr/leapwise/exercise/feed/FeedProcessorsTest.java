@@ -7,8 +7,9 @@ import hr.leapwise.exercise.domain.engine.feed.impl.RomeFeedImpl;
 import hr.leapwise.exercise.domain.processors.RomeFeedProcessor;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorException;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorExceptionMessage;
-import hr.leapwise.exercise.service.FeedProcessor;
-import hr.leapwise.exercise.service.FeedProcessorFactory;
+import hr.leapwise.exercise.domain.FeedProcessor;
+import hr.leapwise.exercise.domain.FeedProcessorFactory;
+import hr.leapwise.exercise.service.AnalysisResultService;
 import org.hamcrest.beans.HasProperty;
 import org.hamcrest.beans.HasPropertyWithValue;
 import org.hamcrest.collection.IsIterableWithSize;
@@ -43,7 +44,7 @@ public class FeedProcessorsTest {
     @Autowired
     FeedProcessorFactory feedProcessorFactory;
 
-    private FeedProcessor customTestProcessor =
+    public FeedProcessor customTestProcessor =
             FeedProcessor.make(
                     (filePath) -> {
                         try {

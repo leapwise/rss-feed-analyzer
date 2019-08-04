@@ -2,8 +2,11 @@ package hr.leapwise.exercise.domain.engine.analyisis.custom;
 
 import hr.leapwise.exercise.domain.engine.analyisis.Dissasambler;
 import hr.leapwise.exercise.domain.engine.analyisis.extractors.impl.CueWord;
+import hr.leapwise.exercise.domain.engine.analyisis.model.Dismantled;
 import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomDescriptor;
-import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItem;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomDissasambled;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomFeedModel;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItemModel;
 import hr.leapwise.exercise.domain.engine.feed.exceptions.FeedException;
 import hr.leapwise.exercise.domain.engine.feed.exceptions.FeedExceptionMessage;
 import hr.leapwise.exercise.domain.engine.feed.impl.RomeFeedEntryImpl;
@@ -12,7 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
-public class FeedCustomDissasambler implements Dissasambler<RomeFeedImpl, Map<CustomDescriptor, Set<CustomItem>>> {
+public class FeedCustomDissasambler implements Dissasambler<RomeFeedImpl, CustomDissasambled> {
 
     // Here, the most simple solution is used which assumes that descriptors could be kept in memory
     //  -> assumption holds as long as the number of words in all feeds is relatively small - which for this implementation is expected to generally be so
@@ -22,16 +25,19 @@ public class FeedCustomDissasambler implements Dissasambler<RomeFeedImpl, Map<Cu
     private Set<CueWord> descriptors = new HashSet<>();
     
     @Override
-    public Map<CustomDescriptor, Set<CustomItem>> disassemble(RomeFeedImpl feed) {
+    public CustomDissasambled disassemble(RomeFeedImpl feed) {
 
-        Map<CustomDescriptor, Set<CustomItem>> significantDescriptors = new HashMap<>();
+        final CustomDissasambled dissasambled = new CustomDissasambled();
+        Map<CustomDescriptor, Set<CustomItemModel>> significantDescriptors = new HashMap<>();
 
         final String feedLanguage = feed.getLanguage();
         if (feedLanguage != null && feedLanguage.matches("(?i)(^EN-.+|.+-EN$)")){
 
+            dissasambled.addFeed(new CustomFeedModel(feed.getTitle(), feed.getLink(), feed.getDate(), feed.getLanguage()));
+
             final EntryCustomDissasambler entryDismantler = new EntryCustomDissasambler();
             Set<CueWord> itemDescriptors;
-            CustomItem item;
+            CustomItemModel item;
 
             for (RomeFeedEntryImpl entry : feed.getFeedEntries()) {
                 item = entryDismantler.disassemble(entry);
@@ -63,6 +69,7 @@ public class FeedCustomDissasambler implements Dissasambler<RomeFeedImpl, Map<Cu
             //  - those that are not will simply not be analysed
             throw new FeedException(FeedExceptionMessage.UNSUPPORTED_LANGUAGE.setParameters(feedLanguage));
         }
-        return significantDescriptors;
+        dissasambled.setSignificantDescriptors(significantDescriptors);
+        return dissasambled;
     }
 }
