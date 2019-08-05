@@ -8,6 +8,8 @@ import java.util.Objects;
 @Embeddable
 public class AnalysisBound implements Serializable {
 
+    private static final long serialVersionUID = 7311796697124762693L;
+
     @Column(name = "result_id")
     private Long resultId;
 

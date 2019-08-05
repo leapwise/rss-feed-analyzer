@@ -1,4 +1,4 @@
-package hr.leapwise.exercise.domain;
+package hr.leapwise.exercise.domain.processors;
 
 import java.util.Optional;
 import java.util.function.Function;

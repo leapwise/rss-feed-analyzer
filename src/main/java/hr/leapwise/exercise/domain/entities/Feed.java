@@ -9,6 +9,8 @@ import java.time.Instant;
 @Table(name = "FEED")
 public class Feed extends FeedEntry {
 
+    private static final long serialVersionUID = 5290735733098451946L;
+
     @Column
     private Instant lastBuildDate;
 

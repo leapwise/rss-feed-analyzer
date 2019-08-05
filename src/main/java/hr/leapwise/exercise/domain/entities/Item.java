@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "ITEM")
 public class Item  extends FeedEntry {
 
+    private static final long serialVersionUID = 2664138192013750675L;
+
     // Do not remove - persistence related
     private Item() { }
 

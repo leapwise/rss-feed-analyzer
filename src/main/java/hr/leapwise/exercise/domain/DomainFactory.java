@@ -1,6 +1,6 @@
 package hr.leapwise.exercise.domain;
 
-public interface AbstractFactory<T> {
+public interface DomainFactory<T> {
 
     T create(Class type);
 }

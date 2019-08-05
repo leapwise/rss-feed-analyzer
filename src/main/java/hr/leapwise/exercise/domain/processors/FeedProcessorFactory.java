@@ -1,5 +1,6 @@
-package hr.leapwise.exercise.domain;
+package hr.leapwise.exercise.domain.processors;
 
+import hr.leapwise.exercise.domain.AbstractDomainFactory;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorException;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorExceptionMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class FeedProcessorFactory implements AbstractFactory<FeedProcessor> {
+public class FeedProcessorFactory extends AbstractDomainFactory<FeedProcessor> {
 
     @Autowired
     private List<FeedProcessor> processors;

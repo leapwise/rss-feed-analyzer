@@ -10,6 +10,3 @@ spring:
     properties:
       hibernate:
         # generate_statistics: true
-
-# custom properties
-treshold: 3

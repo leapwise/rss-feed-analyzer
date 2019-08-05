@@ -4,11 +4,16 @@ import hr.leapwise.exercise.dao.AnalysisRepository;
 import hr.leapwise.exercise.dao.DescriptionRepository;
 import hr.leapwise.exercise.dao.ItemRepository;
 import hr.leapwise.exercise.dao.ResultRepository;
-import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.*;
+import hr.leapwise.exercise.domain.engine.analyisis.AnalysisDomainFactory;
+import hr.leapwise.exercise.domain.engine.analyisis.AnalysisInterpreter;
+import hr.leapwise.exercise.domain.engine.analyisis.custom.CustomAnalysisInterpreter;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomDescriptor;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomDismantled;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomDissasambled;
+import hr.leapwise.exercise.domain.engine.analyisis.model.custom.impl.CustomItemModel;
 import hr.leapwise.exercise.domain.entities.*;
-import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorException;
-import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorExceptionMessage;
 import hr.leapwise.exercise.service.AnalysisResultService;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomAnalysisResultService implements AnalysisResultService<CustomDismantled, CustomDissasambled> {
+public class CustomAnalysisResultService implements AnalysisResultService<CustomDismantled, CustomDissasambled, Item> {
 
     @Autowired
     private AnalysisRepository analysisRepository;
@@ -30,6 +35,9 @@ public class CustomAnalysisResultService implements AnalysisResultService<Custom
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private AnalysisDomainFactory analysisDomainFactory;
 
     @Override
     @Transactional
@@ -68,5 +76,28 @@ public class CustomAnalysisResultService implements AnalysisResultService<Custom
             resultIdOptional = Optional.empty();
         }
         return resultIdOptional;
+    }
+
+    @Override
+    public List<Item> getMostFrequentItems(final Long analysisResultId) {
+        List<Item> items = new ArrayList<>();
+
+        if (analysisResultId != null) {
+
+            List<AnalysisResult> analysisResults = analysisRepository.findAllByResultId(analysisResultId);
+
+            if (!analysisResults.isEmpty()) {
+                final AnalysisInterpreter<List<Pair<Long, Long>>, Map<Pair<Long, Long>, Map<Long, Set<Long>>>, List<Long>> interpreter =
+                        analysisDomainFactory.create(CustomAnalysisInterpreter.class);
+
+                List<Long> mostFrequentItems = interpreter.interpret(interpreter.analyse(analysisResults.stream().map(ar -> Pair.of(ar.getDescriptionId(), ar.getItemId())).collect(Collectors.toList())));
+
+                if (!mostFrequentItems.isEmpty()) {
+                    items = itemRepository.findAllById(mostFrequentItems);
+                }
+            }
+
+        }
+        return items;
     }
 }

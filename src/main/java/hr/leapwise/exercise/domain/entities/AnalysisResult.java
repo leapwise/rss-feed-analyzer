@@ -4,10 +4,13 @@ package hr.leapwise.exercise.domain.entities;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ANALYSIS_RESULT")
-public class AnalysisResult {
+public class AnalysisResult implements Serializable {
+
+    private static final long serialVersionUID = -1189682084171789078L;
 
     @EmbeddedId
     AnalysisBound analysisId;

@@ -3,6 +3,7 @@ package hr.leapwise.exercise.domain.entities;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +11,9 @@ import java.util.stream.Stream;
 
 @Entity
 @Table(name = "RESULT")
-public class Result {
+public class Result implements Serializable {
+
+    private static final long serialVersionUID = -6487783908039431474L;
 
     private Result() {};
 

@@ -2,9 +2,10 @@ package hr.leapwise.exercise.domain.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class FeedEntry {
+public abstract class FeedEntry implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

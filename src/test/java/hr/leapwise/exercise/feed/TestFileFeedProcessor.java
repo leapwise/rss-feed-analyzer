@@ -6,7 +6,7 @@ import com.sun.syndication.io.SyndFeedInput;
 import hr.leapwise.exercise.domain.engine.feed.impl.RomeFeedImpl;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorException;
 import hr.leapwise.exercise.domain.processors.exceptions.FeedProcessorExceptionMessage;
-import hr.leapwise.exercise.domain.FeedProcessor;
+import hr.leapwise.exercise.domain.processors.FeedProcessor;
 import org.springframework.stereotype.Component;
 
 import java.io.File;

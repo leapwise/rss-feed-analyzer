@@ -1,18 +1,18 @@
 package hr.leapwise.exercise.domain.engine.analyisis.custom;
 
-import hr.leapwise.exercise.domain.engine.analyisis.AnalyserProperties;
 import hr.leapwise.exercise.domain.engine.analyisis.AnalysisInterpreter;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Component
 public class CustomAnalysisInterpreter implements AnalysisInterpreter<List<Pair<Long, Long>>, Map<Pair<Long, Long>, Map<Long, Set<Long>>>, List<Long>> {
 
-    @Autowired
-    private AnalyserProperties properties;
+    public static Integer TRESHOLD = 3;
 
     public Map<Pair<Long, Long>, Map<Long, Set<Long>>> analyse(List<Pair<Long, Long>> input) {
 
@@ -23,15 +23,15 @@ public class CustomAnalysisInterpreter implements AnalysisInterpreter<List<Pair<
 
         for (Map.Entry<Long, Long> item : itemIdentifiers.entrySet()) {
             final List<Long> descriptors =
-                        input.stream().filter(t -> item.getKey().equals(t.getRight())).distinct().map(Pair::getRight).collect(Collectors.toList());
+                        input.stream().filter(t -> item.getKey().equals(t.getRight())).distinct().map(Pair::getLeft).collect(Collectors.toList());
 
             final Map<Long, Set<Long>> relatedItems = new HashMap<>();
             for (Long descriptor : descriptors) {
 
                input.stream()
-                       .filter(t -> !item.getKey().equals(t.getRight())).filter(t -> descriptor.equals(t.getRight()))
+                       .filter(t -> !item.getKey().equals(t.getRight())).filter(t -> descriptor.equals(t.getLeft()))
                        .collect(Collectors.groupingBy(
-                                Pair::getRight,
+                                Pair::getLeft,
                                 Collectors.mapping(Pair::getRight,
                                         Collectors.collectingAndThen(Collectors.toSet(), HashSet::new))))
                        .forEach(
@@ -48,7 +48,7 @@ public class CustomAnalysisInterpreter implements AnalysisInterpreter<List<Pair<
         return input.entrySet().stream()
                 .map(entry -> Pair.of(entry.getKey().getLeft(), entry.getValue().values().stream().flatMap(id -> Stream.of(id.size())).mapToInt(Integer::intValue).sum()))
                 .sorted(Collections.reverseOrder(Comparator.comparingInt(Pair::getRight)))
-                .limit(3)
+                .limit(TRESHOLD)
                 .map(Pair::getLeft)
                 .collect(Collectors.toList());
     }
