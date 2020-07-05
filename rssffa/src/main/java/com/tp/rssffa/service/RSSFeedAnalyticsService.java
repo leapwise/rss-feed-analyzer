@@ -2,7 +2,6 @@ package com.tp.rssffa.service;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,7 +89,7 @@ public class RSSFeedAnalyticsService {
 
 		List<String> topWords = AnalyzeHelper.searchForTopThreeWords(listOfCountedWords);
 		log.info("Top words in feed = ");
-		topWords.forEach(data -> log.info(data + "\n"));
+		topWords.forEach(data -> log.info(data));
 		
 		Map<String, List<RSSFeedAnalytics>> map = new LinkedHashMap<String, List<RSSFeedAnalytics>>();
 		for (String topWord : topWords) {
